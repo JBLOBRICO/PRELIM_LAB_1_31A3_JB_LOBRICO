@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var student = ViewBag.Student as LAB3_LOBRICO_JB_31A3.Models.Student;
+    var students = ViewBag.Students as List<LAB3_LOBRICO_JB_31A3.Models.Student>;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-primary">Welcome, @ViewBag.StudentName! </h1>
+    </div>
+    <div class="text-end mt-4">
+        <a class="btn btn-primary rounded-pill px-4 py-2" asp-controller="Home" asp-action="AboutMe">
+            👨‍💻 About Me
+        </a>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <!-- Student Info -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">📊 Student Information</h5>
+                    <p><strong>Score:</strong> @ViewBag.Score</p>
+                    <p><strong>Grade:</strong> @ViewBag.Grade</p>
+                    <p><strong>Passed?</strong> @ViewBag.IsPassed</p>
+                    <p><strong>Message:</strong> <span class="text-success fw-semibold">@ViewBag.Message</span></p>
+                    <p><strong>Exam Date:</strong> @ViewBag.ExamDate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tuition Info -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">💸 Tuition Summary</h5>
+                    <p><strong>Tuition Fee:</strong> ₱@ViewBag.TuitionFee</p>
+                    <p><strong>Net Fee (after 10% discount):</strong> <span class="text-primary fw-bold">₱@ViewBag.NetFee</span></p>
+                    <p><strong>Today’s Date:</strong> @ViewBag.Today</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses -->
+    <div class="card border-0 shadow rounded-4 mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-secondary">📚 Enrolled Courses</h5>
+            <p><strong>Courses:</strong> @ViewBag.CourseList</p>
+            <p><strong>Total Courses:</strong> @ViewBag.CourseCount</p>
+        </div>
+    </div>
+
+    <!-- Student Object -->
+    <div class="card border-0 shadow rounded-4 mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-secondary">👤 Student Profile</h5>
+            @if (student != null)
+            {
+                <p><strong>Name:</strong> @student.Name</p>
+                <p><strong>Age:</strong> @student.Age</p>
+                <p><strong>Course:</strong> @student.Course</p>
+            }
+            else
+            {
+                <p><em>No student info available.</em></p>
+            }
+        </div>
+    </div>
+
+    <!-- All Students Table -->
+    <div class="card border-0 shadow rounded-4">
+        <div class="card-body">
+            <h5 class="card-title text-secondary">🧑‍🤝‍🧑 All Students</h5>
+            @if (students != null && students.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Course</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in students)
+                            {
+                                <tr>
+                                    <td>@s.Name</td>
+                                    <td>@s.Age</td>
+                                    <td>@s.Course</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p><i>No student list available.</i></p>
+            }
+        </div>
+    </div>
+</div>
