@@ -49,8 +49,8 @@ namespace LAB3_LOBRICO_JB_31A3.Controllers
 
             var student = new Student
             {
-                Name = "JB",
-                Age = 21,
+                Name = "JB SASPA LOBRICO",
+                Age = 19,
                 Course = "Web Systems"
             };
             ViewBag.Student = student;
